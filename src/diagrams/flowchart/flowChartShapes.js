@@ -102,6 +102,22 @@ function trapezoid(parent, bbox, node) {
   return shapeSvg;
 }
 
+function c4person(parent, bbox, node) {
+  const w = bbox.width;
+  const h = bbox.height;
+  const points = [
+    { x: h / 6, y: 0 },
+    { x: w + h / 6, y: 0 },
+    { x: w - h / 6, y: -h },
+    { x: h / 6, y: -h }
+  ];
+  const shapeSvg = insertPolygonShape(parent, w, h, points);
+  node.intersect = function(point) {
+    return dagreD3.intersect.polygon(node, points, point);
+  };
+  return shapeSvg;
+}
+
 function inv_trapezoid(parent, bbox, node) {
   const w = bbox.width;
   const h = bbox.height;
